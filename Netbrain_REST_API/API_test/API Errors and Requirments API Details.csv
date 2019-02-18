@@ -1,0 +1,166 @@
+﻿Module,API,METHOD,Bug,Requirement,
+Authentication API,login,POST,,1) A success login message is needed. E.g.: XXXX login successfully.,
+,Logout,DELETE,,1) A success logout message is needed. E.g.: XXXX logout successfully.,
+Benchmark API ,Add Benchmark,POST,,1) A success create benchmark message is needed. E.g.: Benchmark created successfully. With Benchmark detail information .,
+,Update benchmark,PUT,,"1) Success response too simple.
+2) Provide an alert with no attribute updated.
+3) Required input parameters provided not accuracy.
+4) We'd better can return the whole body of the updated benchmark.
+5) Should we provide an API for all existing benchmarks in current domain.",
+,Delete Benchmark,DELETE,,,
+,Run Benchmark Task now,POST,1) One benchmark can be call multi-times even the benchmark is already runing. Not efficiency.,"1) Success response too simple.
+2) When I set the taskName as empty, the statusdescription not accuracy. (Message needed.)",
+,GetBenchmark Task Status,GET,"1) Input can be benchmark ID, but can not find benchmark ID from GUI or by API",1) Do we need to provide a Stop_Benchmark_API.,
+,GetBenchmark Task Runs,GET,,,
+Device API ,Get All devices of a domain,GET,"1) Calling this API by Postman, token can only be set as parameter not header.
+2) When provided an un-exist hostname, the response shows ""Success"" which is not reasonable.
+3) With a wrong format IP input, the response also shows ""Success"", an alert message should be provided.",1) Extend the input as a hostname list would be much better.,
+,Get Device byip,GET,,,
+,Get group devices,GET,,"1) Set input as empty(""""), the response shows ""No Resourse."" which is not accuracy. An alert message should be provided.",
+,Create device attribute,POST,"1) Same attribute can be created multiplely, only with different name. Not efficency.",1) Success response too simple.,
+,set device attribute,PUT,1) Attribute value can be null. Not reasonable.,1) Success response too simple.,
+,get Device attributes,GET,"1) input an un-exist attribute, response shows ""success"".",,
+,delete device attribute,DELETE,"1) with an un-exist attribute name, the response ""Method is not supposrt""",1) success response too simple.,
+,Get device data,GET,,,
+,Delete Device byips,DELETE,,,
+,Delete device by host or IP,DELETE,,,
+Discovery API,Add Seed IP(s) To Discovery,POST,"1) API can be multi called with same input list, not efficency.",1) Success response too simple.,
+,Delete seed IP(s) From Discovery Task,DELETE,"1) With empty IP list input, the delete all feature is too sudden.
+2) Same IPS can be multiple deleted which is not efficency.",1) Success response too simple.,
+,Run Discovery Task Now,POST,,"1) Too simple of success response.
+2) The response of empty input is not accuracy.
+3) Can we extend a little of this API to provide the duration of the DT which the API triggered.",
+,Get Discovery Task Status,GET,,"1) Success response too simple.
+2) When set the taskID and taskName as empty, the response is not accuracy.",
+,Get Discovery Task Result,GET,,"1) An alert message should be provided when the input as null.
+2) If provide an un-exist devices list to API, the response also shows ""Success"". Although the ""devices[]"" is empty but still not accuracy.",
+,Get Discovery Live Access Log,GET," 1) Before calling this API, users should check the information of discovery task(DT) first, to make sure is there any discovery seed inside the DT. If so, is this DT has been running? Or when users call this API directly the 'liveLogs' list in response would be empty. "," 1) Although the Ips list is not a required input but we should provide a message when users parse a empty list into API.
+ 2) Also when users provide a un-exist ip or wrong ip we should also provide a message.
+ 3) We should mention users, if there are too many devices in current discovery task, when the user try to get the live access log, the response could be a gigantic json file. May be cause some issues.
+        
+       ",
+,Get All Seed IPS From Discovery,GET,,1) The response of empty input error is too simple and not accuracy.,
+,Get All Discovery Tasks,GET,,,
+Interface API,Get All Interface of a Device,GET,,1) this function can only return all physical interfaces. ,
+,Create Interface Attribute,POST,"1) In document, ""deviceTypeNames"" is a required input but can be set as null. That is a little confused.
+2) When I set interfaceType randomly (set as ""blahblahblah""), the response shows ""Success"". That is not reliable.
+3) ""isFullSearch"" is a required attribute, but when I set ir as empty """" or random value ""blahblahblah"" the response shows ""Success"". That is not reliable.","1) Successful response too simple, we'd better return the detail information of the new attribute body content.
+2) ""statusDiscription"" of duplicate attribute name is not accuracy.",
+,Set Interface Attribute,PUT,"1) Most important thing is that our interface API (Get all interfaces, Get Interface Attributs, Set interface Attributs API)can only present the informations of physical interfaces, but can not get the details of other interfaces like: IPv4 Interface, IPv6 Interface ... But actually i can create attributs of other interfaces by calling ""Create interface attribute API""
+2) When i set the ""attributeValue"" as empty, the response shows ""Success"". That is conflict with document body requirment.",,
+,GET Interface Attributes,GET,"1) In query parameter table, the ""interfaceName"" attribute is a required input. But when I test this API, if i don't provide the value of ""interfaceName"", the response will return all interfaces informations of current device. Surprise.
+2) The response with wrong input of hostname will shows ""Success."". It is not reasonable. Although there would be no other informations of the un-exist device.
+3) Same with other get and set function, call this API can only return the inforamtion of physical interfaces, without Ipv4 Ipv6 and other kinds of interfaces.",,
+,Delete Interface Attributes,DELETE,,"1) The ""attributeName"" imput is not the display name of the attributes which means they cannot be fount from GUI Site section. I must log in as admin and go to Tenant Management GDR Data Configuration to check the attribute name. I think it is unconviencing for users to call this API.",
+Map API,Export map,GET,"1) in the parameter table, the map_format should not be concerned as required input.
+2) In Postman, when i calling this API, it was success at first time but after that there was always an error came out after i calling this API again and again, although i can get the success response in Python with same input.","1) we should provide a alert to user who wants to calling this API that the map created by user through our GUI must be saved before calling this API. Or there would be a error occured as mentioned in ""Error Examples"".",
+,Delete map,DELETE,"1) The ""url"" input should be set as a path parameter i think.
+2) This API still cannot be called successfully through Postman. But in Python it always working.",1) The succesful response is too simple. We should provide a message to show which map has been deleted. If we can present the name of the map in response than it would be much better.,
+Module API ,GET All Modules of a device,GET,1) The information of required inputs in paramater table is not accuracy.,"1) Success response too simple, at least a message should provided, return whole attribute body would be the best.",
+,Create Module Attribute,POST,1) The information of required inputs in paramater table is not accuracy.,"1) Success response too simple, at least a message should provided, return whole attribute body would be the best.",
+,Set Module Attribute,PUT,,"1) The success response too simple, return the module body should be the best.
+2) The response of empty input is not accuracy,as shown in error examples.",
+,Get ModuleAttribute,GET,"1) Get module attributes failed! - {""statusCode"":793001,""statusDescription"":""Inner exception. please check system log(default location: log/NgThirdAPI.log)""}",,
+,Delete Module Attribute,DELETE,1) The input parameter shouldn't be set as a body parameter.,"1) The success response too simple, a message about which attribute has been deleted is needed.
+2) We should mention users that the input ""attributeName"" is the property name shown in 'GDR Data Configuration' not the name shown in the Netbrain desktop.",
+NetworkSetting API,Add Network setting,POST,"1) Although an error occured and the response shows ""Network settings added Failed!""  when I add a new network into system, but the ""privateKey"" always can be created into system. Is that a default setting or creating API bug?","1) Successful response too simple, return the body information of the new created network would be the best choice.",
+,Update network setting,PUT,,"1) Success response too simple, a note message needed, to show which network setting and which attribute be updated. 2) As a update function, when user calling this API but with out any attributs value update, a alert should be provided to users, ""No attridute has been updated!""",
+,Delete Network Setting,DELETE,"1) The network setting API is very hard to test, first, too many input parameters, the most confused is the logic is so strange, very hard to understand. During setting parameters we totally consider five sections: ""private key"", ""telnet Info"", ""privilege Info"", ""snmp Info"" and ""jumpBox"", we'd better separate the function for different sections. Actually now, although i have to put in all five sections values together to call each API but in the background, for each section is also not synchronized.  ","1) success response too simple.
+2) simplify input is necessary.
+3) for each API, the required attributes information from body table is not accuracy.",
+Path API,Calculate Path,POST,,"1) The required input attributes shown in body table is not accuracy
+2) This API don't have the format check feature for all Ips inputs. I think that is dangerous.",
+,Get Path Calculation Result,GET,,1) The empty input response is not accuracy. too simple.,
+,  Resolve Device Gateway API,,,,
+Role API,Add Role,POST,,"1) Success response too simple, a message is needed, return the new role body information would be the best.
+2) The duplicate ""roleName"" response can be improved, shows which name is duplicated.
+3) In the body table, it requires ""roleName"" and ""description"" should be string, ""privileges"" should be a list of integer, But when I set ""roleName"" and ""description"" as integer and ""privileges"" as a string, the role also can be created successfully. That is not resonable, a wrong type alert should be provided.
+4) According the input of ""privileges"" should be a list of integer to spicified the corresponding privilege for the new created role, users neet a table to clarify the number for each privilege, and when I check the table in online help, there is no corresponding number for each privilege. That would be confused to users.",
+,Update Role,PUT,"1) The inputs method is not standard for REST API, we should set ""roleName"" as a path parameter (shouldn't put it into body).","1) Success response to simple.
+2) Same input type issue with ""Add Role API"".
+3) Number provided in ""Roles and Privileges Table"" not right, some number doesn't exist, some numbers not only correspond to one privilege, table not full cover the privilege information provided in UI Roles.
+4) We should remind users, when users want to update one role information but keep current ""roleName"", then users must keep the input of ""newRoleName"" as null(""""). Or there would be a error occured.",
+,Delete Role,DELETE,,Same with previous two APIs,
+Site API,Create a Site Transaction,POST,,1) successful response too simple.,
+,Site Transaction Heartbeat,POST,,1) successful response too simple.,
+,Commit Site Transaction,PUT,,"1) Success response too simple.
+2) Although ""rebuildSite"" is an optional input, but still need a value type checking.",
+,Remove Site Transaction,DELETE,,,
+,Create Sites,POST,"1) After one new site has been created, can it be reviewed in System desktop? (I can not find new site after I calling this API successfully in GUI)","1) The success response too simple.
+2) The other error description seems like all similar and not present the error very clearly. After review the description, I don't know what i should do to fix it. 
+3) Funtion feature description not clear. 
+",
+,Create a Parent Site,POST,,"1) The success response too simple.
+2) How to check from GUI to confirm whether the new site created successflly.
+3) Because of there is no API to trigger an exist site transaction. So we should mention users if users want to calling this API, the ""create site transaction API"" must be called first.
+4) The parent site with same path can be multi-created. That is not efficency.",
+,Create a Leaf Site,POST,,Same Issue problems.,
+,Delete a Site,DELETE,1) How to get the corresponding site Id for each site? (No API can return a Site ID),"1) Success response too simple.
+2) The response of first wrong input error not reasonable. (Please check my Github, link :https://github.com/Gongdai/Netbrain_REST_API_First_Regularization/blob/master/Netbrain_REST_API/API_test/Site%20API20Design/STANDARD_formate_Delete_A_Site_API_Test.ipynb )",
+,Get Site Info,GET,"1) In order to calling this API successfully, I called the ""Create Site Transaction API"" first then called the ""Create Site API"" and both of them shows ""Success"", then I put the path which i used in ""Create Site API"" into ""Get Info API"" want to get the detail information of the new site which i just created. But the resposne shows ""Site Created Failed! - {""statusCode"":791006,""statusDescription"":""site with path My Network/Site2 does not exist.""}"". That is very confused.","1) From previous Site APIs, in my opinion, the most important feature of get info API is it can return the value of Site Id, but the site Id also can be considered as a input for this API. That is odd. And as my concern, in success response of three create site APIs, we must return the detail information of each site to users, at least the siteIds. Or that is very unreasonable to use the siteId as a key input for many API functions.
+2) My concern, should we provide an API to return all Sites the user have.",1
+,Get Child Sites,GET,,,
+,Add Site Devices,POST,"1) The ""Devices"" input should not allowed to be null or empty, that is not resonable.","1) Success response too simple.
+3) The response of wrong input Path in hard to be understand.
+4) The response of devices wrong input is not reasonable.  
+5) Same devices can be multi-added to same site.",
+,Delete Site Device,DELETE,"1) For a DELETE rest api, the input should not be set as a body parameter, query or path parameter are the standard structure.","1) Simple success response.
+2) Same device can be multiple deleted, odd.
+3) Unexist devices appeared in input list, should be alerted.",
+,Replace Site Device,PUT,1) Not working although the response shows success.,"1) Too simple success response.
+2) Same Devices List also can be update, not efficency.",
+,Get Site Devices,GET,"1) From this API, i really doubt the functionality of ""Add Site devices API"", is it really work.",,
+Tenant Domain Management API,Add Tenant,POST,,"1) A input values type checking is needed. Although it can be created successfully, but we need regularization.",
+,Update Tenant,PUT,,"1) Success response too simple.
+2) Required parameters not accuracy.
+3) With empty or duplicate attribute values this API also return success, not efficiency.",
+,Delete Tenant,DELETE,,"1) Success response too simple.
+2) The response of empty input not accuracy.",
+,Get All Tenant,GET,,,
+,Get All Domains of A Tenant,GET,,,
+,Assign Users to Tenant,POST,"1) With wrong input values of ""username"" and ""isTenantAdmin"", API can return success, that's not reasonable.
+2) Same user can add into same tenant and set as tenant admin multi-times, that is not right.",1) Response of empty input of tenantID is not accuracy.,
+,Add Domain,POST,,1) A input value type checking is needed.,
+,Update Domain,PUT,,"1) Success response too simple.
+2) Multiple useless update, not efficancy.",
+,Delete Domain,DELETE,,"1) success response too simple.
+2) the response of wrong input is not accuracy.",
+,Assign Users to Domain,POST,"1) without domain Id input, the response also Success, How can that be.
+2) multi-assign one user to one domain, even the user is already in this domain.","1) succss response too simple.
+",
+,Remove Users from Domain,PUT,"1) the ""domainID"" can be null, although that is reasonable but wired.","1) success response too simple.
+2) We should mention users when they calling this API, users must clarify the privilege of the other user which will be remove from the domain first, or ther would be some unexpected error occcured.",
+,Set Operating Domain for Current Session,POST,,1) success response too simple.,
+Topology API,Build L2Topolopy,POST,,"My own concern: due to the response, url, Http method, input of L2 and L3 API are almost same, so when users calling these two APIs, is there gonna be any possible the users will mis-using two taskIds. I just have a little suggest that in the response, in the taskId attribute, how about change the attribute name into ""L2 taskId"" and ""L3 taskId"". That would be much clear.",
+,Build L3Topolopy,POST,,,
+,Get Device Neighbor byTopolopyType,GET,,,
+,GetTopolopyBuild Task Status,GET,"1) In the description of this API, it is said: ""to query the ***running*** status of a topology build task status in a domain"". And i am a little confused about that actually I have created two tasks in L2 and L3 respectively and get them ""taskId"",but i don't know how to trigger them to run.","1) Response not very accuracy, an alert message should be provided.",
+,Get ConnectedSwicthPort,GET,,"1) The first error response is not accuracy, an addition message is needed.
+2) In online document, it shows the ""ips"" input set as a query input which is not right.",
+User API,Add User,POST,"0) How a new user to call this API? There is no token for users to calling this API before they create accounts and calling Log in API to get the token.
+1) How to pass a customized role to a new user by calling API?
+2) If a new user calling this API to create a new account, how the new user can know the information about tenants.","1) Success response.
+2) Input value type checking.",
+,Update User,PUT,Same with previous API,,
+,Delete User,DELETE,,"Only issue is about the response, no matter success or not.",
+,Get Usage Report of users,GET,"1) In my opinion, the tenant and domain ID should be set as path parameters.","1) Check whether the domainId is valid.
+2) Date format checking.
+3) ""fromDate"" in future alert.",
+,Get User Detail Usage Report,GET,Same with previous API,,
+,,,,,
+New REST API,Get Device Configuration API,GET,,,
+,Get One-Ip Table,GET,,"1) There should be a attribute to present the size (how many items) of the current One-Ip Table.
+2) A input value type checking is needed.
+3) The response of ""count > 1000"" should be improved.
+4) The response of """"beginIndex"" > size of One-Ip Table"" is not accuracy.",
+,Get Role(s) information,GET,,,
+,Get Tune Result,GET,Not Working now.,,
+,Get User(s) information,GET,,,
+,Tune Devices,POST ,Not Working now.,,
+Trigger API,Trigger Map And Path API,POST ,,"1) No status code and description.
+2) Input parameter explanations too simple, too hard to be understanded.
+3) Required parameters provided not accuraccy, for different kind of maps, there are some different required parameters.",
+,,,,,
+,,,,,
+,,,,,
+,,,,,
