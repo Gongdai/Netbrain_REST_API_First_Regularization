@@ -1,24 +1,24 @@
-REST API Summary
+***REST API Summary***
 <br><br>
-Top 3 REST API Bugs:
+***Top 3 REST API Bugs:***
 "1. Explain Documenttation not clear, Required input parameters not clarified. Some explaination of input parameters too simple to be understood.(Trigger diagnosis API)"
 "2. Some APIs only can be called from python not on Postman, e.g. Export map API, Get all devices of a domain API…"
 3. A lot of problem occurred in Site API need to be corrected.(Check API Details Table).
 <br><br>
-Top 3 REST API Requirment:
+***Top 3 REST API Requirment:***
 "1. For each API response, a ""Message: "" attribute is needed, to point out error clearly during alling API, separate HTTP status and function calling result status."
 "2. For All POST, PUT and DELETE method APIs, in success response should return the body detail information which has been created, modified or deleted."
 "3. Impove our online help RESTful API library, provide more commands in code sample. Some users still don't know how to call our API after review our libaray."
 <br><br>
-Top 3 Use Cases
+***Top 3 Use Cases***
 "1. Present Trigger Daignosis API detailly, provide coding sample on online-help. According to the gigantic input body, we 'd better provide a fully Input Body structure, let users only need to follow our stucture sample and put in their attribute values directly. "
 "2. Present Get One-Ip table API detailly, provide coding sample on online-help. Improve the explaination for each input parameter. The API documant on Swagger have errors."
 "3. Provide a clear logical relationship exlpanation between three path APIs, and describe all possible errors when calling those APIs with solving methods. "
 <br><br>
-New or Deleted API Requirements
+***New or Deleted API Requirements***
 1. Create Devices Group API
 "2. Get Device Data API (Not only configuration file also Route, ARP, MAC and NDP)."
 <br><br>
 
-My own concern
+***My own concern***
 1. A REST API Explorer would be much helpful.
