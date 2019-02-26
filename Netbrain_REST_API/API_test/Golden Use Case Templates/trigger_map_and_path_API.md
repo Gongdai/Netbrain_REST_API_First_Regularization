@@ -15,13 +15,13 @@ Call this API to trigger a map built by Netbrain from third part software.
 > **Authentication** : 
 
 >|**Type**|**In**|**Name**|
-|------|------|------|
+|---|---|---|
 |Bearer Authentication| Headers | Authentication token | 
 
 ## Request body(****required***)
 
 >|**Name**|**Type**|**Description**|
-|------|------|------|
+|---|---|---|
 |domain_setting.tenant_id* | string  | Tenant Id  |
 |domain_setting.domain_id* | string  | Domain Id  |
 |basic_setting.triggered_by* | string  | Trigger user |
@@ -273,20 +273,20 @@ body = {
 > **Data Format Headers**
 
 > |**Name**|**Type**|**Description**|
-|------|------|------|
+|---|---|---|
 | Content-Type | string  | support "application/json" |
 | Accept | string  | support "application/json" |
 
 > **Authorization Headers**
 
 > |**Name**|**Type**|**Description**|
-|------|------|------|
+|---|---|---|
 | token | string  | Authentication token, get from login API. |
 
 ## Response
 
 >|**Name**|**Type**|**Description**|
-|------|------|------|
+|---|---|---|
 |mapId| string | The ID of the map which users triggered from third party sofware.  |
 |mapName| string | The name of the map. |
 |mapType| string | Create Map Mode.<br>0: Map Device and Its Neighbors.<br>1: Open Site Map of the Device.<br>2: Open Existing Map.<br>3: Map a Path.<br>4: Create an Empty Map.  |
