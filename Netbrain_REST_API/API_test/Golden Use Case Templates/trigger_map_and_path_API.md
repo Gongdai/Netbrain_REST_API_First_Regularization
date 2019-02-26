@@ -1,256 +1,137 @@
+
 # Trigger Map API Design
 
 ## ***POST*** /V1/Triggers/Run
-Call this API to trigger a map built by Netbrain
-from third part software.
+Call this API to trigger a map built by Netbrain from third part software.
 
 ## Detail Information
 
-> **Title** : Trigger Map And
-Path API<br>
+> **Title** : Trigger Map And Path API<br>
 
 > **Version** : 02/08/2019.
 
-> **API Server URL** : http(s)://IP
-address of NetBrain Web API Server/ServicesAPI/API/V1/Triggers/Run
+> **API Server URL** : http(s)://IP address of NetBrain Web API Server/ServicesAPI/API/V1/Triggers/Run
 
->
-**Authentication** : 
+> **Authentication** : 
 
 >|**Type**|**In**|**Name**|
 |------|------|------|
-|<img
-width=100/>|<img width=100/>|<img width=500/>|
-|Bearer Authentication| Headers |
-Authentication token | 
+|Bearer Authentication| Headers | Authentication token | 
 
 ## Request body(****required***)
+
 >|**Name**|**Type**|**Description**|
 |------|------|------|
-|<img
-width=100/>|<img width=100/>|<img width=500/>|
-|domain_setting.tenant_id* |
-string  | Tenant Id  |
+|domain_setting.tenant_id* | string  | Tenant Id  |
 |domain_setting.domain_id* | string  | Domain Id  |
 |basic_setting.triggered_by* | string  | Trigger user |
-|basic_setting.user_id |
-string  | User Id，Not required |
+|basic_setting.user_id | string  | User Id，Not required |
 |basic_setting.user* | string  | User Name |
 |basic_setting.device* | string  | Device Name  |
-|basic_setting.interface |
-string  | Interface Name，Not required  |
-|basic_setting.stub_name* | string  |
-Stub Name  |
+|basic_setting.interface | string  | Interface Name，Not required  |
+|basic_setting.stub_name* | string  | Stub Name  |
 |basic_setting.stub_setting | object  | Stub Setting Information  |
-|basic_setting.stub_setting.mode | int  | Triggered Type.<br> 0: Real-Time,<br>
-1: On-Demand  |
+|basic_setting.stub_setting.mode | int  | Triggered Type.<br> 0: Real-Time,<br> 1: On-Demand  |
 |map_setting | object  | Map Setting Information  |
-|map_setting.map_create_mode | int  | Create Map Mode.<br>0: Map Device and Its
-Neighbors.<br>1: Open Site Map of the Device.<br>2: Open Existing Map.<br>3: Map
-a Path.<br>4: Create an Empty Map.  |
-|map_setting.map_open_para | object  |
-parameters of opening exist map  |
-|map_setting.map_open_para.map_id| string  |
-map Id |
+|map_setting.map_create_mode | int  | Create Map Mode.<br>0: Map Device and Its Neighbors.<br>1: Open Site Map of the Device.<br>2: Open Existing Map.<br>3: Map a Path.<br>4: Create an Empty Map.  |
+|map_setting.map_open_para | object  | parameters of opening exist map  |
+|map_setting.map_open_para.map_id| string  | map Id |
 |map_setting.map_open_para.site_id | string  | Site Id  |
 |map_setting.map_open_para.device_group_id | string  | Device Group Id  |
-|
-map_setting.map_open_para.duplicate_map | bool | duplicate flag |
-|
-map_setting.map_device_para | object | device parameters for creating map |
-|
-map_setting.map_device_para.device | string | device name |
-|
-map_setting.map_device_para.include_neighbor | bool | include neighbor flag |
-|
-map_setting.map_device_para.interfaces | list | interface name list |
-|
-map_setting.map_device_para.neighbor_type | string | topo Link type id |
-|
-map_setting.map_device_sitemap_para | object | device site map |
-|
-map_setting.map_device_sitemap_para.device | string | device name |
-|
-map_setting.map_device_sitemap_para.duplicate_map | bool | duplicate map flag |
+| map_setting.map_open_para.duplicate_map | bool | duplicate flag |
+| map_setting.map_device_para | object | device parameters for creating map |
+| map_setting.map_device_para.device | string | device name |
+| map_setting.map_device_para.include_neighbor | bool | include neighbor flag |
+| map_setting.map_device_para.interfaces | list | interface name list |
+| map_setting.map_device_para.neighbor_type | string | topo Link type id |
+| map_setting.map_device_sitemap_para | object | device site map |
+| map_setting.map_device_sitemap_para.device | string | device name |
+| map_setting.map_device_sitemap_para.duplicate_map | bool | duplicate map flag |
 | map_setting.map_path_para | object | parameters of creating map by path |
-|
-map_setting.map_path_para.source | string | source device name |
-|
-map_setting.map_path_para.source_gateway | string | source gateway |
-|
-map_setting.map_path_para.source_gateway_dev | string | source gateway device
-name |
-| map_setting.map_path_para.source_gateway_intf | string | source gateway
-interface name |
-| map_setting.map_path_para.source_port | string | source port
-|
+| map_setting.map_path_para.source | string | source device name |
+| map_setting.map_path_para.source_gateway | string | source gateway |
+| map_setting.map_path_para.source_gateway_dev | string | source gateway device name |
+| map_setting.map_path_para.source_gateway_intf | string | source gateway interface name |
+| map_setting.map_path_para.source_port | string | source port |
 | map_setting.map_path_para.destination | string | destination device name |
-|
-map_setting.map_path_para.destination_gateway | string | destination gateway |
-| map_setting.map_path_para.destination_gateway_dev | string | destination
-gateway device name |
-| map_setting.map_path_para.destination_gateway_intf |
-string | destination gateway interface name |
-|
-map_setting.map_path_para.destination_port | string | destination port |
-|
-map_setting.map_path_para.direction | int | path direction | 
-|
-map_setting.map_path_para.protocol | string | protocol id |
-|
-map_setting.map_path_para.protocol_name | string | protocol name |
-|
-map_setting.map_path_para.path_analysis_set | string | path analysis set id |
-|
-map_setting.map_path_para.path_analysis_set_name | string | path analysis set
-name | 
+| map_setting.map_path_para.destination_gateway | string | destination gateway | 
+| map_setting.map_path_para.destination_gateway_dev | string | destination gateway device name |
+| map_setting.map_path_para.destination_gateway_intf | string | destination gateway interface name |
+| map_setting.map_path_para.destination_port | string | destination port |
+| map_setting.map_path_para.direction | int | path direction | 
+| map_setting.map_path_para.protocol | string | protocol id |
+| map_setting.map_path_para.protocol_name | string | protocol name |
+| map_setting.map_path_para.path_analysis_set | string | path analysis set id |
+| map_setting.map_path_para.path_analysis_set_name | string | path analysis set name | 
 | map_setting.map_path_para.dataSource | object | path run data source |
-| map_setting.map_path_para.dataSource.type | int | Run Type<br>1: Live<br>2:
-Baseline<br>3: Range<br>4: Around |
-|
-map_setting.map_path_para.dataSource.recent | object | null |
-|
-map_setting.map_path_para.dataSource.recent.duration | float | Run duration | 
-|
-map_setting.map_path_para.dataSource.recent.unit | int | Time Unit<br> 1:Hour;
-2:Minutes; 3:Second; 4:Day. |
-| map_setting.map_path_para.dataSource.range |
-object | range information |
-| map_setting.map_path_para.dataSource.range.start
-| datetime | start time of range |
-|
-map_setting.map_path_para.dataSource.range.end | datetime | end time of range |
+| map_setting.map_path_para.dataSource.type | int | Run Type<br>1: Live<br>2: Baseline<br>3: Range<br>4: Around |
+| map_setting.map_path_para.dataSource.recent | object | null |
+| map_setting.map_path_para.dataSource.recent.duration | float | Run duration | 
+| map_setting.map_path_para.dataSource.recent.unit | int | Time Unit<br> 1:Hour; 2:Minutes; 3:Second; 4:Day. |
+| map_setting.map_path_para.dataSource.range | object | range information |
+| map_setting.map_path_para.dataSource.range.start | datetime | start time of range |
+| map_setting.map_path_para.dataSource.range.end | datetime | end time of range |
 | map_setting.map_path_para.dataSource.around | object | around information |
-|
-map_setting.map_path_para.dataSource.around.time | datetime | time |
-|
-map_setting.map_path_para.dataSource.around.radius | object | radius information
-|
-| map_setting.map_path_para.dataSource.around.radius.duration | float | Run
-duration |
-| map_setting.map_path_para.dataSource.around.radius.unit | int |
-Time Unit<br> 1:Hour; 2:Minutes; 3:Second; 4:Day. |
-| runbook_setting | object |
-Runbook Setting information |
-| runbook_setting.runbookPath | string | runbook
-path |
+| map_setting.map_path_para.dataSource.around.time | datetime | time |
+| map_setting.map_path_para.dataSource.around.radius | object | radius information |
+| map_setting.map_path_para.dataSource.around.radius.duration | float | Run duration |
+| map_setting.map_path_para.dataSource.around.radius.unit | int | Time Unit<br> 1:Hour; 2:Minutes; 3:Second; 4:Day. |
+| runbook_setting | object | Runbook Setting information |
+| runbook_setting.runbookPath | string | runbook path |
 | runbook_setting.runbookNodes | list | all runbook nodes |
-|
-runbook_setting.runbookNodes[].enabled | bool | runbook node enable flag |
-|
-runbook_setting.runbookNodes[].runbookNodeId | string | runbook node Id |
-|
-runbook_setting.runbookNodes[].runbookNodeType | int | runbook node type<br>0:
-Free Texe Node<br>1: Qapp Task Node<br>2: Monitor Task Node<br>4: Ping Task
-Node<br>5: Trace Task Node<br>7: Benchmark Task Node/Retrieve Live Data<br>13:
-CliCommand Node<br>17: Path Task Node<br>30: Gapp Task Node |
-|
-runbook_setting.runbookNodes[].useDeviceOnMap | bool | use devices of map or not
-|
-| runbook_setting.runbookNodes[].maxExecutingMins | int | max run minutes of
-the node |
-| runbook_setting.runbookNodes[].runbookNodeSetting | object |
-setting information of node type |
-| runbook_setting.CLI_settings | list | CLI
-Command Node settings information by order |
-|
-runbook_setting.CLI_settings[].devices | list | cli command device for the node
-|
+| runbook_setting.runbookNodes[].enabled | bool | runbook node enable flag |
+| runbook_setting.runbookNodes[].runbookNodeId | string | runbook node Id |
+| runbook_setting.runbookNodes[].runbookNodeType | int | runbook node type<br>0: Free Texe Node<br>1: Qapp Task Node<br>2: Monitor Task Node<br>4: Ping Task Node<br>5: Trace Task Node<br>7: Benchmark Task Node/Retrieve Live Data<br>13: CliCommand Node<br>17: Path Task Node<br>30: Gapp Task Node |
+| runbook_setting.runbookNodes[].useDeviceOnMap | bool | use devices of map or not |
+| runbook_setting.runbookNodes[].maxExecutingMins | int | max run minutes of the node |
+| runbook_setting.runbookNodes[].runbookNodeSetting | object | setting information of node type |
+| runbook_setting.CLI_settings | list | CLI Command Node settings information by order |
+| runbook_setting.CLI_settings[].devices | list | cli command device for the node |
 | runbook_setting.CLI_settings[].devices[].deviceId | string | device Id |
-|
-runbook_setting.CLI_settings[].devices[].deviceName | string | device Name |
-|
-runbook_setting.CLI_settings[].retrieveData | object | retrieve setting for cli
-command of the node |
-| runbook_setting.CLI_settings[].retrieveData.showCommand
-| list | show command list |
-| runbook_setting.retrieve_settings | list |
-Retrieve Node settings information by order |
-|
-runbook_setting.retrieve_settings[].devices | list | retrieve device for the
-node |
-| runbook_setting.retrieve_settings[].devices[].deviceId | string |
-device Id |
-| runbook_setting.retrieve_settings[].devices[].deviceName | string
-| device Name |
-| runbook_setting.retrieve_settings[].retrieveData | object |
-retrieve setting for retrieve of the node |
-|
-runbook_setting.retrieve_settings[].retrieveData.deviceInfo | bool | retrieve
-device basic info flag |
-|
-runbook_setting.retrieve_settings[].retrieveData.interfaceInfo | bool | retrieve
-device interface info flag |
-|
-runbook_setting.retrieve_settings[].retrieveData.config | bool | retrieve config
-flag |
-| runbook_setting.retrieve_settings[].retrieveData.macTable | bool |
-retrieve mac table flag |
-|
-runbook_setting.retrieve_settings[].retrieveData.arpTable | bool | retrieve arp
-table flag |
-| runbook_setting.retrieve_settings[].retrieveData.nctTable | bool
-| retrieve nct table flag |
-|
-runbook_setting.retrieve_settings[].retrieveData.bgpNbr | bool | retrieve bgp
-table flag |
-| runbook_setting.retrieve_settings[].retrieveData.routeTable |
-bool | retrieve route table flag |
-|
-runbook_setting.retrieve_settings[].retrieveData.stpTable | bool | retrieve stp
-table flag |
-| runbook_setting.retrieve_settings[].retrieveData.cdpTable | bool
-| retrieve cdp table flag |
-|
-runbook_setting.retrieve_settings[].retrieveData.showCommand | list | show
-command list |
-| runbook_setting.ping_settings | list | Ping Node settings
-information by order |
-| runbook_setting.ping_settings[].source_type | int |
-Source Device Type<br>1: NetworkServer<br>2: Device<br>4: IP |
-|
-runbook_setting.ping_settings[].source | string | source device name |
-|
-runbook_setting.ping_settings[].source_interface | string | sourece interface
-name |
-| runbook_setting.ping_settings[].destination_type | int | destination
-Device Type<br>1: NetworkServer<br>2: Device<br>4: IP |
-|
-runbook_setting.ping_settings[].destination | string | destination device name |
-| runbook_setting.ping_settings[].destination_interface | string | destination
-interface name |
-| runbook_setting.ping_settings[].timeout_seconds | int | time
-out seconds |
-| runbook_setting.ping_settings[].packet_bytes | int | package
-size |
+| runbook_setting.CLI_settings[].devices[].deviceName | string | device Name |
+| runbook_setting.CLI_settings[].retrieveData | object | retrieve setting for cli command of the node |
+| runbook_setting.CLI_settings[].retrieveData.showCommand | list | show command list |
+| runbook_setting.retrieve_settings | list | Retrieve Node settings information by order |
+| runbook_setting.retrieve_settings[].devices | list | retrieve device for the node |
+| runbook_setting.retrieve_settings[].devices[].deviceId | string | device Id |
+| runbook_setting.retrieve_settings[].devices[].deviceName | string | device Name |
+| runbook_setting.retrieve_settings[].retrieveData | object | retrieve setting for retrieve of the node |
+| runbook_setting.retrieve_settings[].retrieveData.deviceInfo | bool | retrieve device basic info flag |
+| runbook_setting.retrieve_settings[].retrieveData.interfaceInfo | bool | retrieve device interface info flag |
+| runbook_setting.retrieve_settings[].retrieveData.config | bool | retrieve config flag |
+| runbook_setting.retrieve_settings[].retrieveData.macTable | bool | retrieve mac table flag |
+| runbook_setting.retrieve_settings[].retrieveData.arpTable | bool | retrieve arp table flag |
+| runbook_setting.retrieve_settings[].retrieveData.nctTable | bool | retrieve nct table flag |
+| runbook_setting.retrieve_settings[].retrieveData.bgpNbr | bool | retrieve bgp table flag |
+| runbook_setting.retrieve_settings[].retrieveData.routeTable | bool | retrieve route table flag |
+| runbook_setting.retrieve_settings[].retrieveData.stpTable | bool | retrieve stp table flag |
+| runbook_setting.retrieve_settings[].retrieveData.cdpTable | bool | retrieve cdp table flag |
+| runbook_setting.retrieve_settings[].retrieveData.showCommand | list | show command list |
+| runbook_setting.ping_settings | list | Ping Node settings information by order |
+| runbook_setting.ping_settings[].source_type | int | Source Device Type<br>1: NetworkServer<br>2: Device<br>4: IP |
+| runbook_setting.ping_settings[].source | string | source device name |
+| runbook_setting.ping_settings[].source_interface | string | sourece interface name |
+| runbook_setting.ping_settings[].destination_type | int | destination Device Type<br>1: NetworkServer<br>2: Device<br>4: IP |
+| runbook_setting.ping_settings[].destination | string | destination device name |
+| runbook_setting.ping_settings[].destination_interface | string | destination interface name |
+| runbook_setting.ping_settings[].timeout_seconds | int | time out seconds |
+| runbook_setting.ping_settings[].packet_bytes | int | package size |
 | runbook_setting.ping_settings[].packet_count | int | package count |
-|
-runbook_setting.ping_settings[].fragment | bool | fragment flag in package |
-|
-runbook_setting.tracert_settings | list | Traceroute Node settings information
-by order |
-| runbook_setting.tracert_settings[].source_type | int | Source
-Device Type<br>1: NetworkServer<br>2: Device<br>4: IP |
-|
-runbook_setting.tracert_settings[].source | string | source device name |
-|
-runbook_setting.tracert_settings[].source_interface | string | sourece interface
-name |
-| runbook_setting.tracert_settings[].destination_type | int | destination
-Device Type<br>1: NetworkServer<br>2: Device<br>4: IP|
-|
-runbook_setting.tracert_settings[].destination | string | destination device
-name |
-| runbook_setting.tracert_settings[].destination_interface | string |
-destination interface name |
-|
-runbook_setting.tracert_settings[].timeout_seconds | int | time out seconds |
-|
-runbook_setting.tracert_settings[].max_hops | int | max hops |
+| runbook_setting.ping_settings[].fragment | bool | fragment flag in package |
+| runbook_setting.tracert_settings | list | Traceroute Node settings information by order |
+| runbook_setting.tracert_settings[].source_type | int | Source Device Type<br>1: NetworkServer<br>2: Device<br>4: IP |
+| runbook_setting.tracert_settings[].source | string | source device name |
+| runbook_setting.tracert_settings[].source_interface | string | sourece interface name |
+| runbook_setting.tracert_settings[].destination_type | int | destination Device Type<br>1: NetworkServer<br>2: Device<br>4: IP|
+| runbook_setting.tracert_settings[].destination | string | destination device name |
+| runbook_setting.tracert_settings[].destination_interface | string | destination interface name |
+| runbook_setting.tracert_settings[].timeout_seconds | int | time out seconds |
+| runbook_setting.tracert_settings[].max_hops | int | max hops |
 
 > ***Example:***
 
-```{.python .input}
+
+```python
 # In this cell we provide a full body input, including 6 sub-sections, each sub-section provide different input informations. 
 # Although more than one hundred attributes in this body, but fortunately not all of them are required parameters. 
 
@@ -389,49 +270,34 @@ body = {
 
 ## Headers
 
->
-**Data Format Headers**
+> **Data Format Headers**
 
 > |**Name**|**Type**|**Description**|
 |------|------|------|
-|<img width=100/>|<img width=100/>|<img width=500/>|
-|
-Content-Type | string  | support "application/json" |
-| Accept | string  |
-support "application/json" |
+| Content-Type | string  | support "application/json" |
+| Accept | string  | support "application/json" |
 
 > **Authorization Headers**
 
->
-|**Name**|**Type**|**Description**|
+> |**Name**|**Type**|**Description**|
 |------|------|------|
-|<img
-width=100/>|<img width=100/>|<img width=500/>|
-| token | string  |
-Authentication token, get from login API. |
+| token | string  | Authentication token, get from login API. |
 
 ## Response
+
 >|**Name**|**Type**|**Description**|
 |------|------|------|
-|<img
-width=100/>|<img width=100/>|<img width=500/>|
-|mapId| string | The ID of the
-map which users triggered from third party sofware.  |
-|mapName| string | The
-name of the map. |
-|mapType| string | Create Map Mode.<br>0: Map Device and Its
-Neighbors.<br>1: Open Site Map of the Device.<br>2: Open Existing Map.<br>3: Map
-a Path.<br>4: Create an Empty Map.  |
-|mapUrl| string | The URL link of the map
-triggered by users.  |
-|statusCode| integer | The returned status code of
-executing the API.  |
-|statusDescription| string | The explanation of the status
-code.  |
+|mapId| string | The ID of the map which users triggered from third party sofware.  |
+|mapName| string | The name of the map. |
+|mapType| string | Create Map Mode.<br>0: Map Device and Its Neighbors.<br>1: Open Site Map of the Device.<br>2: Open Existing Map.<br>3: Map a Path.<br>4: Create an Empty Map.  |
+|mapUrl| string | The URL link of the map triggered by users.  |
+|statusCode| integer | The returned status code of executing the API.  |
+|statusDescription| string | The explanation of the status code.  |
 
 > ***Example***
 
-```{.python .input}
+
+```python
 {
     'mapId': '13304db4-6c28-401a-b546-5920b0db7750',
     'mapName': 'stubTest1-20190208211759',
@@ -442,7 +308,8 @@ code.  |
 
 # Full Example:
 
-```{.python .input  n=3}
+
+```python
 import requests
 import json
 import time
@@ -533,22 +400,20 @@ result = TriggerTask(API_Body)
 result
 ```
 
-```{.json .output n=3}
-[
- {
-  "data": {
-   "text/plain": "{'mapId': '13304db4-6c28-401a-b546-5920b0db7750',\n 'mapName': 'stubTest1-20190208211759',\n 'mapType': 1,\n 'mapUrl': 'http://192.168.28.79/map.html?t=fb24f3f0-81a7-1929-4b8f-99106c23fa5b&d=0201adc4-ae96-46f0-ae3d-01cdba9e41d6&id=13304db4-6c28-401a-b546-5920b0db7750&maptype=1'}"
-  },
-  "execution_count": 3,
-  "metadata": {},
-  "output_type": "execute_result"
- }
-]
-```
+
+
+
+    {'mapId': '13304db4-6c28-401a-b546-5920b0db7750',
+     'mapName': 'stubTest1-20190208211759',
+     'mapType': 1,
+     'mapUrl': 'http://192.168.28.79/map.html?t=fb24f3f0-81a7-1929-4b8f-99106c23fa5b&d=0201adc4-ae96-46f0-ae3d-01cdba9e41d6&id=13304db4-6c28-401a-b546-5920b0db7750&maptype=1'}
+
+
 
 # cURL Code from Postman:
 
-```{.python .input}
+
+```python
 curl -X POST \
   http://192.168.28.79/ServicesAPI/API/V1/Triggers/Run \
   -H 'Content-Type: application/json' \
@@ -572,7 +437,8 @@ curl -X POST \
 
 # Error Examples and Notes:
 
-```{.python .input}
+
+```python
 ###################################################################################################################    
 
 """Error 1: empty and wrong inputs"""
@@ -840,7 +706,8 @@ Response:
         
 ```
 
-```{.python .input}
+
+```python
 '''
 Some Issues:
 
@@ -859,6 +726,7 @@ Some Issues:
 
 ![Capture.JPG](attachment:Capture.JPG)
 
-```{.python .input}
+
+```python
 
 ```
