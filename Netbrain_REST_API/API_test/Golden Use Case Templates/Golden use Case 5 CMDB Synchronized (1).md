@@ -1,5 +1,5 @@
 
-# CMDB Synchronizedhttps
+# CMDB Synchronized
 During current use case, we are going to output One-Ip table of current domain devices, modify the devices attributes and return all detail informations of device interface attributes. The step sequential is showing below:
 
 **[Step 1: Use case preparation](Step-1:-Use-case-preparation)**
