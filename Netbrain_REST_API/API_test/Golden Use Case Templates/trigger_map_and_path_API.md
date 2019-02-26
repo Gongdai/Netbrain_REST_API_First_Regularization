@@ -14,7 +14,7 @@ Call this API to trigger a map built by Netbrain from third part software.
 
 > **Authentication** : 
 
->|**Type**|**In**|**Name**|
+>| **Type** | **In** | **Name** |
 |---|---|---|
 |Bearer Authentication| Headers | Authentication token | 
 
